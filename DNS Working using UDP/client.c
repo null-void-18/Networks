@@ -1,3 +1,4 @@
+//The code for receiving IP address for a website from top level domain server
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
