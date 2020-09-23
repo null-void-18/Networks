@@ -10,8 +10,9 @@
 
 int main(){
         int sockfd;
-        struct sockaddr_in servaddr;
+        struct sockaddr_in servaddr,cliaddr;
         char buff[1000];
+        socklen_t cl;
 
         sockfd=socket(AF_INET,SOCK_DGRAM,0);
 
@@ -20,14 +21,17 @@ int main(){
         servaddr.sin_addr.s_addr=INADDR_ANY;
         servaddr.sin_port=htons(3000);
 
+        bind(sockfd,(struct sockaddr*)&servaddr,sizeof(servaddr));
+
+        cl=sizeof(cliaddr);
         while(1){
         bzero(buff,1000);
-        fgets(buff,sizeof(buff),stdin);
+        recvfrom(sockfd,(char *)buff,1000,0,(struct sockaddr*)&cliaddr,&cl);
 
-        sendto(sockfd,(char *)buff,sizeof(buff),0,(struct sockaddr*)&servaddr,sizeof(servaddr));
+        printf("Client : %s",buff);
         bzero(buff,1000);
-        recvfrom(sockfd,(char *)buff,1000,0,NULL,NULL);
-        printf("Server : %s",buff);
+        fgets(buff,1000,stdin);
+        sendto(sockfd,(char *)buff,1000,0,(struct sockaddr*)&cliaddr,cl);
         }
         return 0;
 }
