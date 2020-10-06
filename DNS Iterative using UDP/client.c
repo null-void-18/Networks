@@ -1,3 +1,5 @@
+//Working code to implement DNS Iterative procedure
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
