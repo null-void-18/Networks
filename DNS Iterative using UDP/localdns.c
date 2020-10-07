@@ -46,7 +46,7 @@ int main(){
         sendto(newfd,(char *)buff,strlen(buff)+1,0,(struct sockaddr*)&tdsaddr,sizeof(servaddr));
 
         recvfrom(newfd,(char *)rec,1000,0,NULL,NULL);
-        printf("\nRoot DNS Server : %s",buff);
+        printf("\nRoot DNS Server : %s",rec);
         sendto(sockfd,(char *)rec,strlen(rec)+1,0,(struct sockaddr*)&cliaddr,cl);
 
         close(newfd);
@@ -82,7 +82,7 @@ int main(){
         file[i]='\0';
 
         sendto(nfd,(char *)file,strlen(file)+1,0,(struct sockaddr*)&rootaddr,sizeof(servaddr));
-        sendto(nfd,(char *)buff,strlen(buff)+1,0,(struct sockaddr*)&rootaddr,sizeof(servaddr));
+        sendto(nfd,(char *)rec,strlen(rec)+1,0,(struct sockaddr*)&rootaddr,sizeof(servaddr));
         bzero(buff,1000);
         recvfrom(nfd,(char *)buff,1000,0,NULL,NULL);
         printf("\nTLD DNS Server : %s",buff);
