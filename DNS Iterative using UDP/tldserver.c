@@ -99,7 +99,7 @@ int main(){
             if(flag==1)
             printf("IP address : %s",file2);
             else
-                strcpy(ip,"Error.. URL does not exist.");
+                strcpy(file2,"Error.. URL does not exist.");
             sendto(sockfd,(char *)file2,strlen(file2)+1,0,(struct sockaddr*)&cliaddr,cl);
 
             close(sockfd);
