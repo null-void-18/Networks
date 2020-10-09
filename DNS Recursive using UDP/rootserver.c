@@ -1,3 +1,5 @@
+//Root DNS code... Sends website extension to TLD and gets the IP address from TLD 
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -13,14 +15,17 @@ int main(){
         struct sockaddr_in servaddr,cliaddr;
         char buff[1000];
         socklen_t cl;
-
+        
+        //socket creation
         sockfd=socket(AF_INET,SOCK_DGRAM,0);
 
-
+        //defining the structure of servaddr
         servaddr.sin_family=AF_INET;
         servaddr.sin_addr.s_addr=INADDR_ANY;
         servaddr.sin_port=htons(3000);
-
+        //port number 3000 is used to communicate with client
+        
+        
         bind(sockfd,(struct sockaddr*)&servaddr,sizeof(servaddr));
 
         cl=sizeof(cliaddr);
@@ -31,20 +36,18 @@ int main(){
         int newfd;
         struct sockaddr_in tdsaddr;
 
-
+        //new socket creation to communicate with TLD server
         newfd=socket(AF_INET,SOCK_DGRAM,0);
 
-
+        //used port number 4000 to communicate with TLD server
         tdsaddr.sin_family=AF_INET;
         tdsaddr.sin_addr.s_addr=INADDR_ANY;
         tdsaddr.sin_port=htons(4000);
-
+        
         char *file1="com.txt",*file2="edu.txt";
 
-
-
-
-
+        //send website extension and name to TLD and receive the IP address...
+        //after receiving the IP address , send it back to client
         sendto(newfd,(char *)file1,sizeof(file1),0,(struct sockaddr*)&tdsaddr,sizeof(servaddr));
         sendto(newfd,(char *)file2,sizeof(file2),0,(struct sockaddr*)&tdsaddr,sizeof(servaddr));
         sendto(newfd,(char *)buff,1000,0,(struct sockaddr*)&tdsaddr,sizeof(servaddr));
