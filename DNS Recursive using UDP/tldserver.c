@@ -1,3 +1,5 @@
+//TLD Server code
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -13,10 +15,11 @@ int main(){
         struct sockaddr_in servaddr,cliaddr;
         char buff[1000],file1[100],file2[100],ftoken[100],ip[100];
         socklen_t cl;
-
+        
+        //socket creation
         sockfd=socket(AF_INET,SOCK_DGRAM,0);
 
-
+        //defining structure for servaddr
         servaddr.sin_family=AF_INET;
         servaddr.sin_addr.s_addr=INADDR_ANY;
         servaddr.sin_port=htons(4000);
@@ -26,12 +29,14 @@ int main(){
         cl=sizeof(cliaddr);
 
         bzero(buff,1000);
-
+        
+        //receive data from root dns server
         recvfrom(sockfd,(char *)file1,100,0,(struct sockaddr*)&cliaddr,&cl);
         recvfrom(sockfd,(char *)file2,100,0,(struct sockaddr*)&cliaddr,&cl);
         recvfrom(sockfd,(char *)buff,1000,0,(struct sockaddr*)&cliaddr,&cl);
         int i=0,index;
 
+            //open the corresponding file and check for the IP address
             FILE *fptr;
             fptr = fopen(file1, "r");
 
@@ -91,6 +96,8 @@ int main(){
 
                 }
             }
+                
+            //send the IP address back to root dns server
             printf("IP address : %s",ip);
             sendto(sockfd,(char *)ip,100,0,(struct sockaddr*)&cliaddr,cl);
 
