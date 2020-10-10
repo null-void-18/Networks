@@ -14,10 +14,11 @@ int main(){
         int sockfd;
         struct sockaddr_in servaddr;
         char buff[1000];
-
+        
+        //socket creation
         sockfd=socket(AF_INET,SOCK_DGRAM,0);
 
-
+        //we use port number 3000 to communicate with local dns server
         servaddr.sin_family=AF_INET;
         servaddr.sin_addr.s_addr=INADDR_ANY;
         servaddr.sin_port=htons(3000);
@@ -26,6 +27,8 @@ int main(){
         bzero(buff,1000);
         fgets(buff,sizeof(buff),stdin);
 
+        //send the input website name to local dns server 
+        //receive the IP address if any, from local dns
         sendto(sockfd,(char *)buff,strlen(buff)+1,0,(struct sockaddr*)&servaddr,sizeof(servaddr));
         bzero(buff,1000);
         recvfrom(sockfd,(char *)buff,1000,0,NULL,NULL);
