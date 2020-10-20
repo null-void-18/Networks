@@ -1,3 +1,5 @@
+//Root DNS server returns the IP address of extension(.com,.net,.org) TLD servers
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -16,7 +18,7 @@ int main(){
 
         sockfd=socket(AF_INET,SOCK_DGRAM,0);
 
-
+        //We use port number 4000 to communicate with Local DNS server
         servaddr.sin_family=AF_INET;
         servaddr.sin_addr.s_addr=INADDR_ANY;
         servaddr.sin_port=htons(4000);
@@ -79,7 +81,8 @@ int main(){
 
 
 
-
+            // If the IP address is present we send the address
+            // else we send ERROR message
             if(flag==1)
             printf("IP address : %s",ip);
             else
