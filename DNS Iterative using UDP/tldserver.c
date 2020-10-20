@@ -1,3 +1,5 @@
+//The TLD server returns the IP address of the website requested
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -16,7 +18,7 @@ int main(){
 
         sockfd=socket(AF_INET,SOCK_DGRAM,0);
 
-
+        //We use port number 5000 to communicate with Local DNS server
         servaddr.sin_family=AF_INET;
         servaddr.sin_addr.s_addr=INADDR_ANY;
         servaddr.sin_port=htons(5000);
@@ -96,6 +98,9 @@ int main(){
 
                 }
             }
+        
+        //We return the IP address of the website if present
+        //else ERROR is returned
             if(flag==1)
             printf("IP address : %s",file2);
             else
