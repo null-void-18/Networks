@@ -1,3 +1,7 @@
+//Server is the calculator and asks for the operation to be performed
+//Client sends the operands and server does the calculation
+//And then server returns the result
+
 #include<stdio.h>
 #include<sys/types.h>
 #include<sys/socket.h>
