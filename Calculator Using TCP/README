@@ -1,0 +1,5 @@
+USE the following COMMAND TO COMPILE SERVER
+
+  gcc -o s server.c -lm
+  
+  The -lm means link math(lm). This is mandatory because of the SQRT function in server code.
