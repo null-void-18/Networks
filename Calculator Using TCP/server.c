@@ -14,7 +14,8 @@ int main(){
     socklen_t len;
     char buff[200];
     char *s="Enter the operation: \n 1.Addition \n 2.Subtraction \n 3.Multiply \n 4.Division \n 5.SQRT \n";
-    int choice,op1,op2,result;
+    int choice,op1,op2;
+    float result;
 
     sockfd=socket(AF_INET,SOCK_STREAM,0);
 
@@ -60,7 +61,7 @@ int main(){
         default: printf("Operation does not exist...");
     }
 
-    write(clifd,&result,sizeof(int));
+    write(clifd,&result,sizeof(float));
 
     close(sockfd);
     return 0;
