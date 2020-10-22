@@ -15,7 +15,8 @@ int main(){
     int sockfd,choice,op1,op2;
     struct sockaddr_in serv;
     char buff[200];
-
+    float result;
+    
     sockfd=socket(AF_INET,SOCK_STREAM,0);
 
     serv.sin_family=AF_INET;
@@ -40,9 +41,9 @@ int main(){
         write(sockfd,&op1,sizeof(int));
     }
 
-    read(sockfd,&choice,sizeof(int));
+    read(sockfd,&result,sizeof(float));
 
-    printf("\nResult is %d\n",choice);
+    printf("\nResult is %f\n",result);
 
     close(sockfd);
     return 0;
