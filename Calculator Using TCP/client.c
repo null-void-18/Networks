@@ -12,9 +12,12 @@
 #include<unistd.h>
 
 int main(){
+    
     int sockfd,choice,op1,op2;
     struct sockaddr_in serv;
     char buff[200];
+    
+    //since we have square root fucntion we declare the value of result as float
     float result;
     
     sockfd=socket(AF_INET,SOCK_STREAM,0);
@@ -25,6 +28,8 @@ int main(){
 
     connect(sockfd,(struct sockaddr*)&serv,sizeof(serv));
 
+    //send the choice and operands to the server
+    //receive the result from the server
     read(sockfd,buff,sizeof(buff));
     printf("\n%s\n",buff);
     bzero(buff,200);
