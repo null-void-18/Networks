@@ -1,3 +1,5 @@
+//server calculates the result and sends it to the client
+
 #include<stdio.h>
 #include<sys/types.h>
 #include<sys/socket.h>
@@ -15,6 +17,8 @@ int main(){
     char buff[200];
     char *s="Enter the operation: \n 1.Addition \n 2.Subtraction \n 3.Multiply \n 4.Division \n 5.SQRT \n";
     int choice,op1,op2;
+    
+    //since we have sqrt function we declared result as float
     float result;
 
     sockfd=socket(AF_INET,SOCK_STREAM,0);
@@ -30,6 +34,7 @@ int main(){
     clifd=accept(sockfd,(struct sockaddr*)&cli,&len);
     len=sizeof(cli);
 
+    //receive choice from client and calculate the operation
     write(clifd,s,strlen(s)+1);
     read(clifd,&choice,sizeof(int));
 
@@ -60,7 +65,8 @@ int main(){
 
         default: printf("Operation does not exist...");
     }
-
+    
+    //return the result to client
     write(clifd,&result,sizeof(float));
 
     close(sockfd);
