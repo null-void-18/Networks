@@ -1,3 +1,5 @@
+//This is the server code 
+
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
@@ -19,7 +21,7 @@ int main(){
         }
 
 
-
+        //we use port number 3500 to communicate with client
         servaddr.sin_family=AF_INET;
         servaddr.sin_addr.s_addr=htonl(INADDR_ANY);
         servaddr.sin_port=htons(3500);
@@ -32,7 +34,7 @@ int main(){
         cli=sizeof(cliaddr);
         connfd=accept(sockfd,(struct sockaddr*)&cliaddr,&cli);
 
-
+        //read mmessage from client
         while(1){
                 bzero(buff,sizeof(buff));
                 read(connfd,buff,sizeof(buff));
