@@ -1,3 +1,5 @@
+//Server code
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -25,13 +27,14 @@ int main(){
 
         cl=sizeof(cliaddr);
         while(1){
-        bzero(buff,1000);
-        recvfrom(sockfd,(char *)buff,1000,0,(struct sockaddr*)&cliaddr,&cl);
-
-        printf("Client : %s",buff);
-        bzero(buff,1000);
-        fgets(buff,1000,stdin);
-        sendto(sockfd,(char *)buff,1000,0,(struct sockaddr*)&cliaddr,cl);
+                bzero(buff,1000);
+                recvfrom(sockfd,(char *)buff,1000,0,(struct sockaddr*)&cliaddr,&cl);
+                //printing the message received from server
+                printf("Client : %s",buff);
+                bzero(buff,1000);
+                fgets(buff,1000,stdin);
+                sendto(sockfd,(char *)buff,1000,0,(struct sockaddr*)&cliaddr,cl);
         }
+        close(sockfd);
         return 0;
 }
