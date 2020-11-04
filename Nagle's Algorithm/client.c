@@ -10,15 +10,20 @@
 #include<string.h>
 #include<stdlib.h>
 #include<math.h>
+
 int main(){
     int sockfd,rtt,t=0,ud=0,i,p=0;
     struct sockaddr_in servaddr;
     char buff[100],rec[100];
     sockfd=socket(AF_INET,SOCK_STREAM,0);
 
+    //we use port 4000 to communicate with the server
     servaddr.sin_family=AF_INET;
     servaddr.sin_addr.s_addr=INADDR_ANY;
     servaddr.sin_port=htons(4000);
+    
+    //receiving necessary inputs from the user
+    //and sending it to the user
     printf("Enter the string : ");
     fgets(buff,100,stdin);
     printf("Enter the RTT : ");
