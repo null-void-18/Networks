@@ -9,7 +9,6 @@
 #include<arpa/inet.h>
 #include<unistd.h>
 
-
 int main(){
         int sockfd;
         struct sockaddr_in servaddr;
